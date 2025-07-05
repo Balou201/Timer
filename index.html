@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ChronoStats - L'Univers des Chiffres du Temps</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        /* Styles Généraux */
+        body {
+            font-family: 'Montserrat', sans-serif;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start; /* Aligner en haut */
+            align-items: center;
+            min-height: 100vh;
+            background-color: #f0f4f8; /* Arrière-plan doux */
+            margin: 0;
+            padding: 30px 20px;
+            box-sizing: border-box;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        /* En-tête */
+        header {
+            width: 100%;
+            max-width: 1000px;
+            text-align: center;
+            margin-bottom: 40px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #e0e6ec;
+        }
+        header h1 {
+            font-family: 'Roboto Mono', monospace; /* Police plus technique pour le titre */
+            font-size: 3.5em;
+            color: #2c3e50; /* Bleu foncé */
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+        header p {
+            font-size: 1.2em;
+            color: #666;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /* Conteneur des Statistiques */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            width: 100%;
+            max-width: 1000px;
+        }
+
+        /* Carte de Statistique */
+        .stat-card {
+            background-color: #ffffff;
+            border-radius: 15px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            text-align: center;
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .stat-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
+        }
+        .stat-card h2 {
+            font-size: 1.8em;
+            color: #34495e; /* Gris foncé */
+            margin-bottom: 15px;
+        }
+        .stat-card .value {
+            font-family: 'Roboto Mono', monospace;
+            font-size: 2.8em;
+            font-weight: bold;
+            color: #e74c3c; /* Rouge vif pour les chiffres */
+            margin: 20px 0;
+            word-break: break-word; /* Gère les longs nombres */
+            display: block; /* S'assure que le span prend toute la largeur */
+        }
+        .stat-card p {
+            font-size: 0.95em;
+            color: #7f8c8d; /* Gris moyen */
+            margin-top: 15px;
+        }
+        .stat-card .note {
+            font-size: 0.8em;
+            color: #95a5a6; /* Gris clair */
+            margin-top: auto; /* Pousse la note vers le bas */
+            padding-top: 10px;
+            border-top: 1px dashed #ecf0f1;
+        }
+
+        /* Animation des chiffres */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .value {
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2.5em;
+            }
+            .stat-card .value {
+                font-size: 2.2em;
+            }
+            .stat-card h2 {
+                font-size: 1.5em;
+            }
+        }
+        @media (max-width: 480px) {
+            header h1 {
+                font-size: 2em;
+            }
+            .stat-card {
+                padding: 20px;
+            }
+            .stat-card .value {
+                font-size: 1.8em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>ChronoStats</h1>
+        <p>Découvrez des statistiques insolites et des compteurs en temps réel sur vos jeux vidéo préférés et des moments marquants de l'histoire tech !</p>
+    </header>
+
+    <main class="stats-grid">
+
+        <div class="stat-card">
+            <h2>Depuis la sortie de GTA V</h2>
+            <span id="gta5-timer" class="value">Chargement...</span>
+            <p>Grand Theft Auto V, le mastodonte de Rockstar, est sorti le 17 septembre 2013.</p>
+            <p class="note">Compteur de secondes exactes.</p>
+        </div>
+
+        <div class="stat-card">
+            <h2>Blocs cassés dans Minecraft</h2>
+            <span id="minecraft-blocks-timer" class="value">Chargement...</span>
+            <p>Depuis la sortie officielle de Minecraft le 18 novembre 2011, des milliards de blocs ont été détruits par les joueurs à travers le monde.</p>
+            <p class="note">**Estimation** basée sur l'activité globale des joueurs.</p>
+        </div>
+
+        <div class="stat-card">
+            <h2>Victoires Royales dans Fortnite</h2>
+            <span id="fortnite-wins-timer" class="value">Chargement...</span>
+            <p>Depuis le lancement de Fortnite: Battle Royale le 26 septembre 2017, combien de fois le fameux "Victoire Royale" a-t-il été prononcé ?</p>
+            <p class="note">**Estimation** basée sur les données connues et le volume de jeu.</p>
+        </div>
+
+        <div class="stat-card">
+            <h2>Heures de jeu sur League of Legends</h2>
+            <span id="lol-hours-timer" class="value">Chargement...</span>
+            <p>Des millions de joueurs ont investi d'innombrables heures dans les Champs de justice depuis la sortie de LoL le 27 octobre 2009.</p>
+            <p class="note">**Estimation** du temps de jeu cumulé des joueurs.</p>
+        </div>
+
+        <div class="stat-card">
+            <h2>Depuis la sortie du premier iPhone</h2>
+            <span id="iphone-timer" class="value">Chargement...</span>
+            <p>Le tout premier iPhone, révolutionnaire pour son époque, a été lancé le 29 juin 2007.</p>
+            <p class="note">Compteur de secondes exactes.</p>
+        </div>
+
+        <div class="stat-card">
+            <h2>Photos téléchargées sur Instagram</h2>
+            <span id="instagram-photos-timer" class="value">Chargement...</span>
+            <p>Depuis le lancement d'Instagram le 6 octobre 2010, des milliards de photos et vidéos ont été partagées.</p>
+            <p class="note">**Estimation** basée sur le taux de téléchargement moyen.</p>
+        </div>
+
+    </main>
+
+    <script>
+        // --- Dates de Référence ---
+        const releaseDateGta5 = new Date('2013-09-17T00:00:00'); // GTA V
+        const releaseDateMinecraft = new Date('2011-11-18T00:00:00'); // Minecraft 1.0
+        const releaseDateFortniteBR = new Date('2017-09-26T00:00:00'); // Fortnite Battle Royale
+        const releaseDateLoL = new Date('2009-10-27T00:00:00'); // League of Legends
+        const releaseDateIPhone = new Date('2007-06-29T00:00:00'); // Premier iPhone
+        const releaseDateInstagram = new Date('2010-10-06T00:00:00'); // Instagram
+
+        // --- Taux d'Estimations par Seconde (Arbitraires pour l'exemple) ---
+        // Ces taux sont des estimations très grossières pour l'exemple.
+        // En réalité, tu devrais faire des recherches approfondies pour des chiffres plus "crédibles".
+        const minecraftBlocksPerSecond = 500000; // Estimation: 500k blocs cassés par seconde dans le monde
+        const fortniteWinsPerSecond = 0.5; // Estimation: 1 victoire toutes les 2 secondes quelque part dans le monde
+        const lolHoursPerSecond = 1000; // Estimation: 1000 heures de jeu cumulées chaque seconde
+        const instagramPhotosPerSecond = 1000; // Estimation: 1000 photos/vidéos uploadées par seconde
+
+        // --- Fonctions de Mise à Jour des Compteurs ---
+
+        function updateGta5Timer() {
+            const now = new Date();
+            const difference = now.getTime() - releaseDateGta5.getTime();
+            const seconds = Math.floor(difference / 1000);
+            document.getElementById('gta5-timer').textContent = `${seconds.toLocaleString('fr-FR')} secondes`;
+        }
+
+        function updateMinecraftBlocksTimer() {
+            const now = new Date();
+            const difference = now.getTime() - releaseDateMinecraft.getTime();
+            const secondsElapsed = Math.floor(difference / 1000);
+            const totalBlocks = Math.floor(secondsElapsed * minecraftBlocksPerSecond);
+            document.getElementById('minecraft-blocks-timer').textContent = `${totalBlocks.toLocaleString('fr-FR')} blocs`;
+        }
+
+        function updateFortniteWinsTimer() {
+            const now = new Date();
+            const difference = now.getTime() - releaseDateFortniteBR.getTime();
+            const secondsElapsed = Math.floor(difference / 1000);
+            const totalWins = Math.floor(secondsElapsed * fortniteWinsPerSecond);
+            document.getElementById('fortnite-wins-timer').textContent = `${totalWins.toLocaleString('fr-FR')} Victoires Royales`;
+        }
+
+        function updateLoLHoursTimer() {
+            const now = new Date();
+            const difference = now.getTime() - releaseDateLoL.getTime();
+            const secondsElapsed = Math.floor(difference / 1000);
+            const totalHours = Math.floor(secondsElapsed * (lolHoursPerSecond / 3600)); // Convertir secondes en heures
+            document.getElementById('lol-hours-timer').textContent = `${totalHours.toLocaleString('fr-FR')} heures`;
+        }
+
+        function updateIPhoneTimer() {
+            const now = new Date();
+            const difference = now.getTime() - releaseDateIPhone.getTime();
+            const seconds = Math.floor(difference / 1000);
+            document.getElementById('iphone-timer').textContent = `${seconds.toLocaleString('fr-FR')} secondes`;
+        }
+
+        function updateInstagramPhotosTimer() {
+            const now = new Date();
+            const difference = now.getTime() - releaseDateInstagram.getTime();
+            const secondsElapsed = Math.floor(difference / 1000);
+            const totalPhotos = Math.floor(secondsElapsed * instagramPhotosPerSecond);
+            document.getElementById('instagram-photos-timer').textContent = `${totalPhotos.toLocaleString('fr-FR')} photos`;
+        }
+
+        // --- Initialisation et Mise à Jour Périodique ---
+        // Exécute les fonctions une fois au chargement pour afficher les valeurs tout de suite
+        updateGta5Timer();
+        updateMinecraftBlocksTimer();
+        updateFortniteWinsTimer();
+        updateLoLHoursTimer();
+        updateIPhoneTimer();
+        updateInstagramPhotosTimer();
+
+        // Met à jour toutes les secondes pour les compteurs précis et les estimations
+        setInterval(updateGta5Timer, 1000);
+        setInterval(updateMinecraftBlocksTimer, 1000);
+        setInterval(updateFortniteWinsTimer, 1000);
+        setInterval(updateLoLHoursTimer, 1000);
+        setInterval(updateIPhoneTimer, 1000);
+        setInterval(updateInstagramPhotosTimer, 1000);
+    </script>
+</body>
+</html>
